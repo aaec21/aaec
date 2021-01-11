@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node src/app.js",
+    "start": "node src/app.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/app.js -e js,hbs"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "isbot": "^3.0.23",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.11",
     "nodemailer": "^6.4.17"

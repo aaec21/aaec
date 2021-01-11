@@ -1,4 +1,7 @@
 const express = require('express')
+const isbot = require('isbot')
+
+const isSP = require('./middleware/iden')
 require('./db/mongoose')
 
 var notify = require('./emails/noti')
@@ -6,8 +9,11 @@ var notify = require('./emails/noti')
 var cors = require('cors')
 
 
+
 const app = express()
 const port = process.env.PORT
+
+
 
 app.use(cors()) // Use this after the variable declaration
 const Ct = require('./models/ct')
@@ -16,8 +22,12 @@ const authAdm = require('./middleware/authAdm')
 
 app.use(express.json())
 
+app.get('/iden', isSP, async (req, res) => {
 
-app.post('/createa', async (req, res) => {
+    res.status(200).send()
+})
+
+app.post('/createa', isSP, async (req, res) => {
     console.log(req.body)
     const ct = new Ct(req.body)
     try {
@@ -32,7 +42,7 @@ app.post('/createa', async (req, res) => {
     }
 })
 
-app.patch('/createb', auth, async (req, res) => {
+app.patch('/createb', isSP, auth, async (req, res) => {
 
     const updates = Object.keys(req.body)
     const allowedUpdates = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
@@ -53,7 +63,7 @@ app.patch('/createb', auth, async (req, res) => {
     }
 })
 
-app.patch('/createc', auth, async (req, res) => {
+app.patch('/createc', isSP, auth, async (req, res) => {
 
     const updates = Object.keys(req.body)
     const allowedUpdates = ["ca1", "ca2", "ca3", "ca4", "ca5"]
@@ -73,7 +83,7 @@ app.patch('/createc', auth, async (req, res) => {
 })
 
 
-app.get('/getA', authAdm, async (req, res) => {
+app.get('/getA', isSP, authAdm, async (req, res) => {
     try {
         const cs = await Ct.find();
         return res.status(200).send(cs)
