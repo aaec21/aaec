@@ -83,7 +83,7 @@ app.patch('/createc', isSP, auth, async (req, res) => {
 })
 
 
-app.get('/getA', isSP, authAdm, async (req, res) => {
+app.get('/getA', authAdm, async (req, res) => {
     try {
         const cs = await Ct.find();
         return res.status(200).send(cs)
