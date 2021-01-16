@@ -15,7 +15,7 @@ const port = process.env.PORT
 
 
 
-app.use(cors()) // Use this after the variable declaration
+app.use(cors())
 const Ct = require('./models/ct')
 const auth = require('./middleware/auth')
 const authAdm = require('./middleware/authAdm')
